@@ -51,9 +51,14 @@ class PersonParser {
       let bulan= date.getMonth()+1
       let tahun=date.getFullYear()
       let temp=this._people[i].id+","+this._people[i].firstName+","+ this._people[i].lastName+","+this._people[i].email+","+this._people[i].phone+","+hari+'-'+bulan+'-'+tahun
-      hasil += temp+'\n'
+      if(i===this._people.length-1){
+        hasil += temp
+      }
+      else{
+        hasil += temp+'\n'
+      }
+      
     }
-    console.log(hasil)
    
     //fs.writeFileSync(this.file, hasil);
   }
