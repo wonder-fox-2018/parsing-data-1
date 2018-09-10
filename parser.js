@@ -21,7 +21,7 @@ class PersonParser {
   }
  
   get people() {
-    let data=fs.readFileSync('./people.csv','utf-8')
+    let data=fs.readFileSync('people.csv','utf-8')
     let dataSplit=data.split('\n')
     dataSplit.splice(0,1)
     let arrayResult=[]
@@ -44,16 +44,18 @@ class PersonParser {
     this._people.push(people)
   }
   save(){
-    console.log('aaaa')
     let hasil='id,first_name,last_name,email,phone,created_at \n'
     for(let i=0;i<this._people.length;i++){
-      let temp=`${this._people[i].id}, ${this._people[i].firstName}, ${this._people[i].lastName},  ${this._people[i].email},  ${this._people[i].phone},  ${this._people[i].time}`
+      let date= new Date(this._people[i].time)
+      let hari = date.getDate()
+      let bulan= date.getMonth()+1
+      let tahun=date.getFullYear()
+      let temp=this._people[i].id+","+this._people[i].firstName+","+ this._people[i].lastName+","+this._people[i].email+","+this._people[i].phone+","+hari+'-'+bulan+'-'+tahun
       hasil += temp+'\n'
     }
-
-    // console.log(hasil)
+    console.log(hasil)
    
-    // fs.writeFileSync('people.csv', hasil);
+    //fs.writeFileSync(this.file, hasil);
   }
 }
 
