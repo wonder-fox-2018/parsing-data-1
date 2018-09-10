@@ -1,0 +1,68 @@
+"use strict"
+const fs = require('fs');
+
+class Person {
+  // Look at the above CSV file
+  // What attributes should a Person object have?
+  constructor(id,first_name,last_name,email,phone,created_at) {
+    this.id = id;
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.phone = phone;
+    this.created_at = created_at;
+  }
+}
+
+class PersonParser {
+
+  constructor(file) {
+    this._file = file
+    this._people = [] // yang punya personParser 
+
+    this.fetchPeople()
+  }
+
+  fetchPeople() {
+    // read file csv nya
+    // split by enter
+    // looping
+    // split by koma
+    // setiap datanya convert array menjadi object class person
+    // kita push data personnya ke dalam array people
+    var dataLength = fs.readFileSync('./people.csv', 'utf-8').split('\n').length
+    for (var i = 1; i < dataLength; i++) {      
+      var dataFormat = fs.readFileSync('./people.csv', 'utf-8').split('\n')[i].split(',')
+      this._people.push(new Person(dataFormat[0], dataFormat[1], dataFormat[2], dataFormat[3], dataFormat[4], dataFormat[5]))
+    }
+  }
+ 
+  set people(data){
+    // gak ada return 
+    // set / assign property yang ada di class
+    this._people = data
+  }
+  get people() {    
+    // harus ada return 
+    // tidak ada parameter 
+    // tidak untuk assign property 
+    return this._people
+  }
+
+  addPerson(person) {   
+    // tugasnya adalah memasukkan object Person baru kedalam this._pople  
+    this._people.push([person]) 
+    return this._people
+  }
+
+}
+//var result = []
+
+let parser = new PersonParser('people.csv')
+//parser.people = result
+parser.addPerson(new Person('xxx', 'Hadi','NW','hadi@mail.com','08989898878','2018-07-15T12:06:16-07:00'))
+console.log(parser.people[200])
+
+
+
+//console.log(`There are ${parser.getPeople().length} people in the file '${parser.file}'.`)
