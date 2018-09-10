@@ -9,6 +9,7 @@ class PersonParser {
     this._people = []
     this._size = 0
     this._header
+    this.readFile()
   }
 
   get people() {
@@ -125,7 +126,6 @@ class PersonParser {
 }
 
 let parser = new PersonParser('people.csv')
-parser.readFile()
 // console.log(`There are ${parser.people.size} people in the file '${parser.file}'.`) // work
 
 const input = process.argv.slice(2)
